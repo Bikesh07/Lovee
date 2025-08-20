@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mirror of Memories</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to top, #ffe6f0, #fff0f5);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-size: 2.5rem;
+      background: linear-gradient(45deg, #d63384, #8e44ad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .carousel {
+      position: relative;
+      margin: 40px auto 20px;
+      width: 100%;
+      max-width: 900px;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .carousel-slide {
+      flex: 0 0 300px;
+      margin: 0 15px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      transition: transform 0.5s, filter 0.5s;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .carousel-slide.blur img {
+      filter: blur(4px) brightness(70%);
+      transform: scale(0.9);
+    }
+
+    .carousel-slide.active {
+      transform: scale(1.1);
+      z-index: 2;
+    }
+
+    #caption {
+      font-size: 1.3rem;
+      margin: 15px 0;
+      color: #d63384;
+      font-style: italic;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .download-btn, .celebrate-btn {
+      display: inline-block;
+      padding: 12px 25px;
+      margin: 10px 5px;
+      background: linear-gradient(90deg, #ff4b5c, #ff6ec4);
+      color: white;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .download-btn:hover, .celebrate-btn:hover {
+      background: linear-gradient(90deg, #ff6ec4, #ff4b5c);
+      transform: translateY(-2px);
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+      z-index: 5;
+    }
+
+    .arrow.left { left: 10px; }
+    .arrow.right { right: 10px; }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 24px;
+      color: #ff3366;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Mirror of Memories</h1>
+
+  <div class="carousel">
+    <div class="arrow left" onclick="prevSlide()">&#10094;</div>
+
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide active">
+        <img src="assets/pic1.jpeg" alt="Memory 1">
+      </div>
+      <div class="carousel-slide blur">
+        <img src="assets/pic2.jpeg" alt="Memory 2">
+      </div>
+      <div class="carousel-slide blur">
+        <img src="assets/pic5.jpeg" alt="Memory 3">
+      </div>
+      <div class="carousel-slide active">
+        <img src="assets/pic4.jpeg" alt="Memory 1">
+      </div>
+      <div class="carousel-slide blur">
+        <img src="assets/pic3.jpeg" alt="Memory 2">
+      </div>
+      <div class="carousel-slide blur">
+        <img src="assets/pic4.jpeg" alt="Memory 3">
+      </div>
+      <div class="carousel-slide blur">
+        <img src="assets/pic4.jpeg" alt="Memory 3">
+      </div>
+    </div>
+
+    <div class="arrow right" onclick="nextSlide()">&#10095;</div>
+  </div>
+
+  <p id="caption">This smile... my forever favorite 💖</p>
+  <a id="downloadBtn" href="memory1.jpg" download class="download-btn">⬇ Download this memory</a>
+  <a href="celebration.html" class="celebrate-btn">🎉 Let's Celebrate 🎉</a>
+
+  <script>
+    const track = document.getElementById('carouselTrack');
+    const slides = Array.from(track.children);
+    const caption = document.getElementById('caption');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    const captions = [
+      "This smile... my forever favorite 💖",
+      "With you, every day feels like a fairytale ✨",
+      "Our love is my favorite memory 🌹",
+      "Your presence make's me worth Living 💖",
+      "My bestfriend  ✨",
+      "My Love 🌹",
+      "My Forever 💖"
+
+    ];
+
+    let currentIndex = 0;
+
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+        slide.classList.add('blur');
+        if (index === currentIndex) {
+          slide.classList.add('active');
+          slide.classList.remove('blur');
+        }
+      });
+
+      caption.style.opacity = 0;
+      setTimeout(() => {
+        caption.textContent = captions[currentIndex];
+        caption.style.opacity = 1;
+      }, 300);
+
+      downloadBtn.href = slides[currentIndex].querySelector("img").src;
+
+      const slideWidth = slides[0].offsetWidth + 30;
+      track.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateSlides();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateSlides();
+    }
+
+    updateSlides();
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤";
+      document.body.appendChild(heart);
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 20 + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 600);
+  </script>
+</body>
+</html>

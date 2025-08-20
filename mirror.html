@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mirror of Memories</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(to top, #ffe6f0, #fff0f5);
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-top: 50px;
+      font-size: 2.5rem;
+      background: linear-gradient(45deg, #d63384, #8e44ad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .memory-box {
+      margin: 50px auto;
+      padding: 50px;
+      width: 300px;
+      height: 300px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      color: #555;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .memory-box:hover {
+      transform: scale(1.05);
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 24px;
+      color: #ff3366;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Mirror of Memories</h1>
+  <div class="memory-box"id="myButton" onclick="unlockMemories()">
+    ❤️ Click to unlock memories ❤️
+  </div>
+
+  <script>
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤";
+      document.body.appendChild(heart);
+
+      // Random horizontal position
+      heart.style.left = Math.random() * 100 + "vw";
+
+      // Random size
+      heart.style.fontSize = Math.random() * 20 + 20 + "px";
+
+      // Animation duration
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+      // Remove heart after animation
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }
+
+    // Start floating hearts after button click
+    function unlockMemories() {
+      setInterval(createHeart, 400);
+      alert("Memories Unlocked! 💖"); 
+    }
+    document.getElementById("myButton").addEventListener("click", function() { 
+         setTimeout(function() {
+            window.location.href = "gellary.html"; 
+        }, 4000);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.background {
+  background: linear-gradient(135deg, #ffc1cc, #ffb6c1);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.card {
+  background: #fff;
+  padding: 40px 50px;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  text-align: center;
+  max-width: 600px;
+}
+
+.card h1 {
+  font-size: 2.5rem;
+  margin: 0 0 20px 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+
+.card p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+
+.card .line.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#surpriseBtn {
+  margin-top: 25px;
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(90deg, #ff5f7e, #ff2d95);
+  color: white;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+
+#surpriseBtn.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Floating hearts */
+.hearts-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  bottom: -30px;
+  width: 20px;
+  height: 20px;
+  background: url('assets/heart.png') no-repeat center center;
+  background-size: contain;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}

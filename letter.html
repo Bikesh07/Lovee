@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Madam Ji</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ab69f1, #f180d9);
+      color: white;
+      text-align: center;
+      min-height: 100vh;
+      overflow-x: hidden; /* allow vertical scroll only */
+    }
+
+    .title {
+      font-size: 2.5em;
+      font-weight: bold;
+      background: #ff4fa2;
+      padding: 15px 30px;
+      border-radius: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      margin-top: 60px;
+      display: inline-block;
+    }
+
+    .letter {
+      background: white;
+      color: #333;
+      padding: 30px;
+      margin: 30px auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+      max-width: 700px;
+      text-align: left;
+      line-height: 1.6;
+      font-size: 1.1em;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .letter.show {
+      opacity: 1;
+    }
+
+    .hearts {
+      position: fixed;
+      bottom: 0;
+      font-size: 2em;
+      pointer-events: none;
+      animation: floatUp 4s linear forwards;
+      z-index: 999; /* keeps hearts above content */
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to   { transform: translateY(-600px); opacity: 0; }
+    }
+
+    .cake {
+      font-size: 4em;
+      margin-top: 30px;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="title">🎉 Happy Birthday Madam Ji 🎉</div>
+  <div class="cake"></div>
+
+  <!-- Hidden letter -->
+  <div class="letter" id="letterBox">
+    <p><strong>Dear Madam Ji,</strong></p>
+    <p>
+      On this special day, I want to take a moment to celebrate not just your birthday, 
+      but the incredible person you are. Your presence lights up every room you enter, 
+      just like how you’ve lit up our lives.
+    </p>
+    <p>
+      Your kindness, wisdom, and beautiful spirit inspire everyone around you. 
+      You have this magical way of making ordinary moments feel extraordinary, 
+      and today is all about celebrating the magic that is uniquely you.
+    </p>
+    <p>
+      May this new year of your life be filled with endless joy, beautiful surprises, 
+      and all the happiness your heart can hold. You deserve nothing but the very best 
+      that life has to offer.
+    </p>
+    <p><em>Wishing you the most wonderful birthday! 🎂✨</em></p>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bg-music" loop>
+    <source src="romantic.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    window.onload = () => {
+      const letter = document.getElementById("letterBox");
+      const music = document.getElementById("bg-music");
+
+      // Show letter after 2s
+      setTimeout(() => {
+        letter.classList.add("show");
+        music.play();
+
+        // Start floating hearts
+        setInterval(createHeart, 700);
+      }, 2000);
+    };
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("hearts");
+      const emojis = ["❤️", "💖", "💘", "💝", "🥰", "😘", "😍"];
+      heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 4000);
+    }
+  </script>
+</body>
+</html>

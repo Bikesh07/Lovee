@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday My Love 🎂</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background">
+    <div class="card">
+      <h1 id="line1" class="line">Happy Birthday My Love! 💖</h1>
+      <p id="line2" class="line">To the most amazing woman in my life</p>
+      <p id="line3" class="line"><em>"Every moment with you is a gift, and today we celebrate the greatest gift of all – YOU! 🌹"</em></p>
+      <button id="surpriseBtn" onclick="location.href='mirror.html'">Begin Your Surprise! 💝</button>
+    </div>
+    <div class="hearts-container" id="heartsContainer"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Show lines one by one
+    const lines = ["line1", "line2", "line3"];
+    let currentLine = 0;
+
+    function showNextLine() {
+      if (currentLine < lines.length) {
+        document.getElementById(lines[currentLine]).classList.add("show");
+        currentLine++;
+        setTimeout(showNextLine, 1200); // 1.2s delay between lines
+      } else {
+        // Show button at last
+        document.getElementById("surpriseBtn").classList.add("show");
+      }
+    }
+
+    // Start animation
+    window.onload = showNextLine;
+
+    // Floating hearts
+    const heartsContainer = document.getElementById("heartsContainer");
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>

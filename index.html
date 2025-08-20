@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Birthday Surprise</title>
+</head>
+<style>
+input[type="password"] {
+  padding: 12px;
+  width: 250px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  margin: 10px 0;
+  text-align: center;
+}
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  color: #333;
+  text-align: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+</style>
+<body>
+  <div class="container">
+    <h2 class="title">🎂 Welcome to Your Surprise 🎂</h2>
+    <p class="subtitle">Enter the secret password to continue 💌</p>
+    
+    <input type="password" id="passwordInput" placeholder="Enter Password">
+    <br>
+    <button onclick="checkPassword()">Unlock 🔑</button>
+    <p id="error" style="color:yellow; margin-top:10px;"></p>
+  </div>
+
+  <script>
+    function checkPassword() {
+  const password = document.getElementById("passwordInput").value;
+  const correctPassword = "Bikesh123";  // <<< Change this to your secret password
+
+  if (password === correctPassword) {
+    window.location.href = "index01.html";
+  } else {
+    document.getElementById("error").innerText = "❌ Wrong password! Try again.";
+  }
+}
+  </script>
+</body>
+</html>
